@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class ScrollingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -25,6 +27,8 @@ public class ScrollingActivity extends AppCompatActivity {
         title = intent.getStringExtra("movie_title");
         pic = intent.getStringExtra("poster_path");
         desc = intent.getStringExtra("description");
+
+
 
         setTitle(title);
         gambar = url + pic;
@@ -37,5 +41,13 @@ public class ScrollingActivity extends AppCompatActivity {
                 .error(R.mipmap.ic_launcher)
                 .into(detail);
         deskripsi.setText(desc);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 }

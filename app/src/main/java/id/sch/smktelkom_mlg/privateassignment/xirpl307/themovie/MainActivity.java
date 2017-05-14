@@ -85,20 +85,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             fragment = new RecommendFragment();
-            setTitle("Recommended");
+            setTitle("Top Rated");
         } else if (id == R.id.nav_gallery) {
             fragment = new NowFragment();
             setTitle("Now Showing");
         } else if (id == R.id.nav_slideshow) {
             fragment = new ComingFragment();
             setTitle("Coming Soon");
-        } else if (id == R.id.nav_manage) {
-            fragment = new ChildrenFragment();
-            setTitle("Children");
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commitNow();

@@ -49,7 +49,8 @@ public class RecommendFragment extends Fragment {
     }
 
     private void downloadDataResource() {
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=83e9bd45d01bdec860110180bf6d664b&language=en-US&page=1";
+        String url = "https://api.themoviedb.org/3/movie/top_rated?api_key=3b33d4e8ff72e7124ef660baaa7095f6&language=en-US&page=1";
+        //String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=83e9bd45d01bdec860110180bf6d664b&language=en-US&page=1";
 
         GsonGetRequest<ResultsRespons> myRequest = new GsonGetRequest<ResultsRespons>
                 (url, ResultsRespons.class, null, new Response.Listener<ResultsRespons>() {
