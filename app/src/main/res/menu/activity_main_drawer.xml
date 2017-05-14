@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Recomended" />
+            android:title="Recommended" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
@@ -13,11 +13,11 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Comedi" />
+            android:title="Comedy" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Child" />
+            android:title="Children" />
     </group>
 
     <item android:title="Communicate">
