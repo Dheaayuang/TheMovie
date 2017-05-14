@@ -20,26 +20,30 @@ import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.adapter.Recommen
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.model.Results;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.model.ResultsRespons;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.service.GsonGetRequest;
-import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.service.VolleySingleton;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecommendFragment extends Fragment {
+public class NowFragment extends Fragment {
 
     ArrayList<Results> mlist = new ArrayList<>();
-    RecommendAdapter recommendAdapter;
+    RecommendAdapter myPopular;
+
+    public NowFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_recommend, container, false);
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
+        View view = inflater.inflate(R.layout.fragment_now, container, false);
+        RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerView);
         rv.setHasFixedSize(true);
-
-        recommendAdapter = new RecommendAdapter(this, mlist, getContext());
-        rv.setAdapter(recommendAdapter);
+        myPopular = new RecommendAdapter(this, mlist, getContext());
+        rv.setAdapter(myPopular);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
@@ -49,7 +53,8 @@ public class RecommendFragment extends Fragment {
     }
 
     private void downloadDataResource() {
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=83e9bd45d01bdec860110180bf6d664b&language=en-US&page=1";
+
+        String url = "https://api.themoviedb.org/3/movie/popular?api_key=83e9bd45d01bdec860110180bf6d664b&language=en-US&page=1";
 
         GsonGetRequest<ResultsRespons> myRequest = new GsonGetRequest<ResultsRespons>
                 (url, ResultsRespons.class, null, new Response.Listener<ResultsRespons>() {
@@ -59,7 +64,7 @@ public class RecommendFragment extends Fragment {
                         Log.d("FLOW", "onResponse: " + (new Gson().toJson(response)));
                         //fillColor(response.results);
                         mlist.addAll(response.results);
-                        recommendAdapter.notifyDataSetChanged();
+                        myPopular.notifyDataSetChanged();
                     }
 
                 }, new Response.ErrorListener() {
@@ -69,12 +74,8 @@ public class RecommendFragment extends Fragment {
                         Log.e("FLOW", "onErrorResponse: ", error);
                     }
                 });
-        VolleySingleton.getInstance(this).addToRequestQueue(myRequest);
-    }
+        //VolleySingleton.getInstance(this).addToRequestQueue(myRequest);
 
-    //private void fillColor(List<Results> results) {
-    //    for (int i = 0; i < results.size(); i++)
-    //        results.get(i).color = ColorUtil.getRandomColor();
-    //}
+    }
 
 }
