@@ -40,7 +40,7 @@ public class NowFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_now, container, false);
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
+        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv_recycler_view_now);
         rv.setHasFixedSize(true);
 
         nowPlayingAdapter = new NowPlayingAdapter(this, mlist, getContext());
@@ -55,7 +55,8 @@ public class NowFragment extends Fragment {
 
     private void downloadDataResource() {
 
-        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=70f354f1f8ae96f11d8c36c05208ba86&language=en-US&page=1";
+
+        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=<3b33d4e8ff72e7124ef660baaa7095f6&language=en-US&page=1";
 
 
         GsonGetRequest<ResultsRespons> myRequest = new GsonGetRequest<ResultsRespons>
