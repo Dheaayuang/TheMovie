@@ -14,42 +14,41 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.NowFragment;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.R;
-import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.RecommendFragment;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.ScrollingActivity;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.model.Results;
 
 /**
- * Created by Dhea on 5/14/2017.
+ * Created by Dhea on 6/13/2017.
  */
 
-public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.ViewHolder> {
+public class NowPlayingAdapter extends RecyclerView.Adapter<NowPlayingAdapter.ViewHolder> {
+
     public String url = "https://image.tmdb.org/t/p/w500";
     public String image;
-    ArrayList<Results> mlist;
-    RecommendFragment recommendFragment;
-
+    ArrayList<Results> nowList;
+    NowFragment nowFragment;
     Context context;
     private int lastposition = -1;
 
-    public RecommendAdapter(RecommendFragment recommendfragment, ArrayList<Results> mlist, Context context) {
-        this.mlist = mlist;
-        this.recommendFragment = recommendfragment;
+    public NowPlayingAdapter(NowFragment nowFragment, ArrayList<Results> now_List, Context context) {
+        this.nowList = now_List;
+        this.nowFragment = nowFragment;
         this.context = context;
-    }
 
-
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list,parent, false);
-        ViewHolder viewHolder =new ViewHolder(v);
-        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        final Results results = mlist.get(position);
+    public NowPlayingAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(NowPlayingAdapter.ViewHolder holder, int position) {
+        final Results results = nowList.get(position);
         holder.tvName.setText(results.title);
         holder.tvDesc.setText(results.overview);
         image = url + results.backdrop_path;
@@ -78,8 +77,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
 
     @Override
     public int getItemCount() {
-        if (mlist != null)
-            return mlist.size();
+        if (nowList != null)
+            return nowList.size();
         return 0;
     }
 
@@ -97,5 +96,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendAdapter.View
             imageView = (ImageView) itemView.findViewById(R.id.iv_image);
             cardView = (CardView) itemView.findViewById(R.id.cv);
         }
+
     }
 }

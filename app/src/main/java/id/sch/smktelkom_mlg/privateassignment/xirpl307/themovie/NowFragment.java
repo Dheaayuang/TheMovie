@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.adapter.RecommendAdapter;
+import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.adapter.NowPlayingAdapter;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.model.Results;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.model.ResultsRespons;
 import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.service.GsonGetRequest;
@@ -28,7 +28,7 @@ import id.sch.smktelkom_mlg.privateassignment.xirpl307.themovie.service.GsonGetR
 public class NowFragment extends Fragment {
 
     ArrayList<Results> mlist = new ArrayList<>();
-    RecommendAdapter myPopular;
+    NowPlayingAdapter nowPlayingAdapter;
 
     public NowFragment() {
         // Required empty public constructor
@@ -39,11 +39,12 @@ public class NowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_now, container, false);
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerView);
+        View view =  inflater.inflate(R.layout.fragment_now, container, false);
+        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
         rv.setHasFixedSize(true);
-        myPopular = new RecommendAdapter(this, mlist, getContext());
-        rv.setAdapter(myPopular);
+
+        nowPlayingAdapter = new NowPlayingAdapter(this, mlist, getContext());
+        rv.setAdapter(nowPlayingAdapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
@@ -54,7 +55,8 @@ public class NowFragment extends Fragment {
 
     private void downloadDataResource() {
 
-        String url = "https://api.themoviedb.org/3/movie/popular?api_key=83e9bd45d01bdec860110180bf6d664b&language=en-US&page=1";
+        String url = "https://api.themoviedb.org/3/movie/now_playing?api_key=70f354f1f8ae96f11d8c36c05208ba86&language=en-US&page=1";
+
 
         GsonGetRequest<ResultsRespons> myRequest = new GsonGetRequest<ResultsRespons>
                 (url, ResultsRespons.class, null, new Response.Listener<ResultsRespons>() {
@@ -64,7 +66,7 @@ public class NowFragment extends Fragment {
                         Log.d("FLOW", "onResponse: " + (new Gson().toJson(response)));
                         //fillColor(response.results);
                         mlist.addAll(response.results);
-                        myPopular.notifyDataSetChanged();
+                        nowPlayingAdapter.notifyDataSetChanged();
                     }
 
                 }, new Response.ErrorListener() {

@@ -41,6 +41,30 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        changePage(R.id.nav_camera);
+        navigationView.setCheckedItem(R.id.nav_camera);
+    }
+
+    private boolean changePage(int id) {
+        Fragment fragment = null;
+
+        if (id == R.id.nav_camera) {
+            fragment = new RecommendFragment();
+            setTitle("Top Rated");
+        } else if (id == R.id.nav_gallery) {
+            fragment = new NowFragment();
+            setTitle("Now Showing");
+        } else if (id == R.id.nav_slideshow) {
+            fragment = new ComingFragment();
+            setTitle("Coming Soon");
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commitNow();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override
@@ -79,25 +103,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        Fragment fragment = null;
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            fragment = new RecommendFragment();
-            setTitle("Top Rated");
-        } else if (id == R.id.nav_gallery) {
-            fragment = new NowFragment();
-            setTitle("Now Showing");
-        } else if (id == R.id.nav_slideshow) {
-            fragment = new ComingFragment();
-            setTitle("Coming Soon");
-        }
+        changePage(id);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commitNow();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
