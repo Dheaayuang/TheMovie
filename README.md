@@ -39,3 +39,33 @@ film yang akan tayang, dan juga Top Rate Movie.
 ### Library yang Digunakan
 
 SQLite Dasar
+
+### Screenshoots
+
+Tampilan saat Online :
+
+1. 
+
+<img src="https://github.com/Dheaayuang/TheMovie/blob/master/1-online.png">
+
+2. 
+
+<img src="https://github.com/Dheaayuang/TheMovie/blob/master/2-online.png">
+
+3. 
+
+<img src="https://github.com/Dheaayuang/TheMovie/blob/master/3-online.png">
+
+Tampilan saat Offline
+
+1. 
+
+<img src="https://github.com/Dheaayuang/TheMovie/blob/master/1-offline.png">
+
+2.
+
+<img src="https://github.com/Dheaayuang/TheMovie/blob/master/2-offline.png">
+
+3. 
+
+<img src="https://github.com/Dheaayuang/TheMovie/blob/master/3-offline.png">
